@@ -13,9 +13,9 @@
     "require": {
         "php": "^7.1",
         "ext-json": "*",
-        "imper86/http-client-builder": "v1.0",
         "psr/http-message": "^1.0",
-        "symfony/options-resolver": "^4.3"
+        "symfony/options-resolver": "^4.3",
+        "imper86/http-client-builder": "^1.0"
     },
     "require-dev": {
         "php-http/guzzle6-adapter": "^2.0",

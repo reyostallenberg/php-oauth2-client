@@ -13,5 +13,9 @@ use Psr\Http\Message\ResponseInterface;
 
 interface TokenFactoryInterface
 {
-    public function createFromResponse(string $grantType, ResponseInterface $response): TokenInterface;
+    public function createFromResponse(
+        string $grantType,
+        ResponseInterface $response,
+        ?TokenInterface $oldToken = null
+    ): TokenInterface;
 }
