@@ -16,6 +16,7 @@ use Imper86\OauthClient\Constants\TokenEndpointParamsPlace;
 use Imper86\OauthClient\Factory\TokenFactory;
 use Imper86\OauthClient\Factory\TokenFactoryInterface;
 use Imper86\OauthClient\Repository\TokenRepositoryInterface;
+use Symfony\Component\OptionsResolver\Options;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
 class Configuration extends OptionsResolver
@@ -30,7 +31,7 @@ class Configuration extends OptionsResolver
             $this->prepareAuthorizeEndpointConfig($resolver);
         });
 
-        $this->setDefault('http_client_builder', function () {
+        $this->setDefault('http_client_builder', function (Options $options) {
             return new Builder();
         });
         $this->setAllowedTypes('http_client_builder', BuilderInterface::class);
@@ -38,7 +39,7 @@ class Configuration extends OptionsResolver
         $this->setDefault('token_repository', null);
         $this->setAllowedTypes('token_repository', ['null', TokenRepositoryInterface::class]);
 
-        $this->setDefault('token_factory', function () {
+        $this->setDefault('token_factory', function (Options $options) {
             return new TokenFactory();
         });
         $this->setAllowedTypes('token_factory', TokenFactoryInterface::class);
