@@ -33,4 +33,9 @@ interface CredentialsInterface
      * @return array
      */
     public function getScopes(): array;
+
+    /**
+     * @return string|null
+     */
+    public function getBaseUri(): ?string;
 }

@@ -30,6 +30,7 @@ class Credentials implements CredentialsInterface
         $resolver->setAllowedTypes('client_id', 'string');
         $resolver->setAllowedTypes('client_secret', 'string');
         $resolver->setAllowedTypes('redirect_uri', 'string');
+        $resolver->setAllowedTypes('base_uri', 'string');
 
         $resolver->setDefault('scopes', []);
         $resolver->setAllowedTypes('scopes', 'string[]');
@@ -57,4 +58,8 @@ class Credentials implements CredentialsInterface
         return $this->config['scopes'];
     }
 
+    public function getBaseUri(): ?string
+    {
+        return $this->config['base_uri'] ?? null;
+    }
 }
