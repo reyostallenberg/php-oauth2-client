@@ -98,6 +98,21 @@ class OauthClient implements OauthClientInterface
         return $token;
     }
 
+    public function fetchClientCredentialsToken(): TokenInterface
+    {
+        $httpClient = $this->httpClientBuilder->getHttpClient();
+        $request = $this->prepareTokenRequest(GrantType::CLIENT_CREDENTIALS, null);
+        $response = $httpClient->sendRequest($request);
+
+        $token = $this->tokenFactory->createFromResponse(GrantType::CLIENT_CREDENTIALS, $response);
+
+        if ($this->tokenRepository) {
+            $this->tokenRepository->save($token, $this->credentials->getClientId());
+        }
+
+        return $token;
+    }
+
     public function refreshToken(TokenInterface $token): TokenInterface
     {
         $httpClient = $this->httpClientBuilder->getHttpClient();
@@ -205,7 +220,7 @@ class OauthClient implements OauthClientInterface
             $query[$grantParam] = $grant;
         }
 
-        if (TokenEndpointCredentialsPlace::QUERY === $this->config['token_endpoint']['credentials_place']) {
+        if (TokenEndpointCredentialsPlace::HEADER_BASIC_AUTH !== $this->config['token_endpoint']['credentials_place']) {
             $query['client_id'] = $this->credentials->getClientId();
             $query['client_secret'] = $this->credentials->getClientSecret();
         }

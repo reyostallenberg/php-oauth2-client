@@ -30,6 +30,11 @@ interface OauthClientInterface
     public function fetchToken(string $code): TokenInterface;
 
     /**
+     * @return TokenInterface
+     */
+    public function fetchClientCredentialsToken(): TokenInterface;
+
+    /**
      * @param TokenInterface $token
      * @return TokenInterface
      */

@@ -8,9 +8,11 @@
 
 namespace Imper86\OauthClient\Constants;
 
-class TokenEndpointCredentialsPlace
+final class TokenEndpointCredentialsPlace
 {
     const HEADER_BASIC_AUTH = 'header_basic_auth';
 
     const QUERY = 'query';
+
+    const BODY = 'body';
 }
